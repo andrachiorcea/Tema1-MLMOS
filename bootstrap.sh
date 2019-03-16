@@ -1,4 +1,5 @@
 #/bin/bash
+echo "Am intrat in fisier"
 
 #update programs
 
@@ -27,4 +28,5 @@ if ["$selinux_status" == "disabled"]; then
         ret=$?
         "command setenforce failed with exit code $ret" 
     fi
+fi
 
