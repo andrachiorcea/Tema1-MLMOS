@@ -19,9 +19,8 @@ done
 
 #disabling password authentication
 
-getenforce
-selinux_status=$?
-if [ "$selinux_status" == "disabled" ]; then
+var = $(echo grep SELINUX="disabled" /etc/selinux/config | tr "=" "\n" | sed -n 2p)
+if [ "$var" == "disabled" ]; then
     echo "Selinux is disabled"
     setenforce 0
     if [ $? -eq 0 ]; then 
