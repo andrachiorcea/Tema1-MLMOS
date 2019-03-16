@@ -39,8 +39,16 @@ fi
 sed -i 's/(PasswordAuthentication yes)/(PasswordAuthentication no/)' /etc/ssh/sshd_config
 if [ $? -eq 0 ]; then
     echo "You can no longer log in with a password"
+    systemctl restart sshd
+    if [ $? -eq 0 ]; then
+        echo "restarted ssh service"
+    else 
+        echo "problem when restarting ssh service"
+    fi
 else 
     echo "PasswordAuthentication already set to no"
 fi
+
+
 
 
