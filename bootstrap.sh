@@ -17,7 +17,7 @@ for intf in /sys/class/net/*; do
     sudo ifconfig `basename $intf` up
 done
 
-#disabling password authentication
+#selinux
 
 var=`grep SELINUX="disabled" /etc/selinux/config | tr "=" "\n" | sed -n 2p`
 echo "$var"
@@ -33,4 +33,14 @@ if [ "$var" == "disabled" ]; then
 else 
     echo "Selinux is not disabled"
 fi
+
+#disabling password authentication
+
+sed -i 's/(PasswordAuthentication yes)/(PasswordAuthentication no/)' /etc/ssh/sshd_config
+if [ $? -eq 0 ]; then
+    echo "You can no longer log in with a password"
+else 
+    echo "PasswordAuthentication already set to no"
+fi
+
 
