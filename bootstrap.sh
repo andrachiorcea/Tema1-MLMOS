@@ -19,8 +19,8 @@ done
 
 #disabling password authentication
 
-grep SELINUX="disabled" /etc/selinux/config | tr "=" "\n" | sed -n 2p
-if [ "$?" == "disabled" ]; then
+var =`grep SELINUX="disabled" /etc/selinux/config | tr "=" "\n" | sed -n 2p`
+if [ "$var" == "disabled" ]; then
     echo "Selinux is disabled"
     setenforce 0
     if [ $? -eq 0 ]; then 
@@ -29,5 +29,7 @@ if [ "$?" == "disabled" ]; then
         ret=$?
         "command setenforce failed with exit code $ret" 
     fi
+else 
+    echo "Selinux is not disabled"
 fi
 
