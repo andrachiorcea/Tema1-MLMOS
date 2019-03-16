@@ -2,12 +2,12 @@
 echo "Am intrat in fisier"
 
 #update programs
-
-if [[`yum update`]]; then
-  echo "updated successful" >&2
+yum update
+if [ $? -eq 0]; then
+  echo "updated successful"
 else
   ret=$?
-  echo "command failed with exit code $ret" >&2
+  echo "command failed with exit code $ret"
 fi
 
 #interface configuration
