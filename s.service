@@ -1,0 +1,12 @@
+[Unit]
+Description=tema1_mlmos
+Wants=network.target
+After=multi-user.target
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/bin/python /tema1/python/tema1.py
+
+[Install]
+WantedBy=multi-user.target
