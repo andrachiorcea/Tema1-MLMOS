@@ -3,7 +3,7 @@ echo "Am intrat in fisier"
 
 #update programs
 yum update
-if [ $? -eq 0]; then
+if [ $? -eq 0 ]; then
   echo "updated successful"
 else
   ret=$?
@@ -19,10 +19,12 @@ done
 
 #disabling password authentication
 
-selinux_status='getenforce'
-if ["$selinux_status" == "disabled"]; then
+getenforce
+selinux_status=$?
+if [ "$selinux_status" == "disabled" ]; then
     echo "Selinux is disabled"
-    if [[`setenforce 0`]]; then 
+    setenforce 0
+    if [ $? -eq 0 ]; then 
         echo "Setenforce command executed successfully"
     else
         ret=$?
